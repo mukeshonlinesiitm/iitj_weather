@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .weather-icon {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Weather Application</h1>
+        <form method="post" class="mt-4">
+            <div class="form-group">
+                <label for="city">Enter city name:</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
+        </form>
+        {% if weather %}
+            <div class="mt-4">
+                <h2 class="text-center">Weather in {{ weather.city }}</h2>
+                <div class="text-center">
+                    <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" class="weather-icon" alt="Weather icon">
+                </div>
+                <p class="text-center">Temperature: {{ weather.temperature }} °C</p>
+                <p class="text-center">Humidity: {{ weather.humidity }}%</p>
+                <p class="text-center">Wind Speed: {{ weather.wind_speed }} m/s</p>
+                <p class="text-center">Description: {{ weather.description }}</p>
+            </div>
+        {% elif error %}
+            <div class="mt-4 alert alert-danger text-center">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
